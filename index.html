@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legacy Network — The Ultimate Minecraft Experience</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #FFD700;
+    --cyan: #00FFFF;
+    --magenta: #FF00FF;
+    --green: #00FF88;
+    --orange: #FF6600;
+    --red: #FF2244;
+    --blue: #0088FF;
+    --bg: #000000;
+    --surface: #0a0a0f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--cyan);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, background 0.2s;
+    box-shadow: 0 0 20px var(--cyan), 0 0 40px var(--cyan);
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 2px solid rgba(0,255,255,0.4);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 99998;
+    transform: translate(-50%, -50%);
+    transition: all 0.15s ease;
+  }
+
+  /* CANVAS PARTICLES */
+  #canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; width: 100%;
+    z-index: 1000;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+    backdrop-filter: blur(10px);
+  }
+
+  .nav-logo {
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: 1.4rem;
+    letter-spacing: 4px;
+    background: linear-gradient(90deg, var(--cyan), var(--magenta), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+    filter: drop-shadow(0 0 20px rgba(0,255,255,0.5));
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 2px;
+    background: var(--cyan);
+    transition: width 0.3s;
+    box-shadow: 0 0 10px var(--cyan);
+  }
+
+  .nav-links a:hover { color: var(--cyan); }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* ===================== HERO ===================== */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  /* Animated grid floor */
+  .grid-floor {
+    position: absolute;
+    bottom: 0; left: -50%;
+    width: 200%; height: 60%;
+    background-image:
+      linear-gradient(rgba(0,255,255,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,255,0.08) 1px, transparent 1px);
+    background-size: 60px 60px;
+    transform: perspective(500px) rotateX(60deg);
+    transform-origin: bottom center;
+    animation: gridMove 8s linear infinite;
+  }
+
+  @keyframes gridMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 60px; }
+  }
+
+  /* Radial glow behind title */
+  .hero-glow {
+    position: absolute;
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(0,255,255,0.12) 0%, rgba(255,0,255,0.06) 40%, transparent 70%);
+    border-radius: 50%;
+    animation: glowPulse 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes glowPulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.15); opacity: 1; }
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(0,255,255,0.15), rgba(255,0,255,0.15));
+    border: 1px solid rgba(0,255,255,0.4);
+    padding: 8px 24px;
+    border-radius: 2px;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 30px;
+    animation: fadeInDown 1s 0.2s both;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(5rem, 14vw, 14rem);
+    line-height: 0.85;
+    letter-spacing: -2px;
+    position: relative;
+    z-index: 2;
+    animation: fadeInUp 1s 0.4s both;
+  }
+
+  .hero-title .word-legacy {
+    display: block;
+    background: linear-gradient(180deg, #ffffff 0%, #aaaaaa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 40px rgba(255,255,255,0.3));
+  }
+
+  .hero-title .word-network {
+    display: block;
+    background: linear-gradient(90deg, var(--cyan), var(--magenta), var(--gold), var(--green));
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s linear infinite;
+    filter: drop-shadow(0 0 60px rgba(0,255,255,0.6));
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
+  }
+
+  .hero-sub {
+    font-size: 1.3rem;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin: 30px 0 50px;
+    font-weight: 300;
+    animation: fadeInUp 1s 0.6s both;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 20px;
+    animation: fadeInUp 1s 0.8s both;
+    position: relative;
+    z-index: 2;
+  }
+
+  .btn-primary {
+    padding: 18px 50px;
+    background: linear-gradient(135deg, var(--cyan), var(--blue));
+    border: none;
+    color: #000;
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: none;
+    position: relative;
+    overflow: hidden;
+    clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+    transition: transform 0.2s, filter 0.2s;
+  }
+
+  .btn-primary:hover {
+    transform: scale(1.05);
+    filter: brightness(1.2) drop-shadow(0 0 30px var(--cyan));
+  }
+
+  .btn-secondary {
+    padding: 18px 50px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: none;
+    clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+    transition: all 0.3s;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.6);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255,255,255,0.3);
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    animation: fadeInUp 1s 1.5s both;
+    z-index: 2;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, rgba(0,255,255,0.8), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.1); }
+  }
+
+  /* ===================== STATS ===================== */
+  .stats-bar {
+    position: relative;
+    z-index: 2;
+    padding: 40px 60px;
+    background: linear-gradient(90deg, rgba(0,255,255,0.05), rgba(255,0,255,0.05), rgba(0,255,255,0.05));
+    border-top: 1px solid rgba(0,255,255,0.15);
+    border-bottom: 1px solid rgba(0,255,255,0.15);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    text-align: center;
+  }
+
+  .stat-item {
+    position: relative;
+  }
+
+  .stat-item::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 20%;
+    width: 1px; height: 60%;
+    background: rgba(255,255,255,0.1);
+  }
+
+  .stat-item:last-child::after { display: none; }
+
+  .stat-number {
+    font-family: 'Orbitron', monospace;
+    font-size: 3rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--gold), var(--orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-top: 8px;
+  }
+
+  /* ===================== GAMEMODES ===================== */
+  .section {
+    position: relative;
+    z-index: 2;
+    padding: 120px 60px;
+  }
+
+  .section-tag {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 6px;
+    color: var(--cyan);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-tag::before {
+    content: '';
+    width: 30px;
+    height: 1px;
+    background: var(--cyan);
+    box-shadow: 0 0 8px var(--cyan);
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 6vw, 6rem);
+    line-height: 1;
+    margin-bottom: 20px;
+    background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .section-desc {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.5);
+    max-width: 600px;
+    line-height: 1.7;
+    margin-bottom: 70px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+  }
+
+  /* Game cards */
+  .games-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .game-card {
+    position: relative;
+    height: 380px;
+    overflow: hidden;
+    cursor: none;
+    group: true;
+  }
+
+  .game-card:first-child {
+    grid-row: span 2;
+    height: auto;
+    min-height: 760px;
+  }
+
+  .game-bg {
+    position: absolute;
+    inset: 0;
+    transition: transform 0.6s ease;
+  }
+
+  .game-card:hover .game-bg {
+    transform: scale(1.08);
+  }
+
+  .game-card-1 .game-bg { background: linear-gradient(135deg, #0a1628 0%, #001f4d 30%, #003080 60%, #001428 100%); }
+  .game-card-2 .game-bg { background: linear-gradient(135deg, #1a0a0a 0%, #4d0000 40%, #800020 70%, #1a0a0a 100%); }
+  .game-card-3 .game-bg { background: linear-gradient(135deg, #0a1a0a 0%, #004d00 40%, #008040 70%, #0a1a0a 100%); }
+  .game-card-4 .game-bg { background: linear-gradient(135deg, #1a0a1a 0%, #4d004d 40%, #800080 70%, #1a0a1a 100%); }
+  .game-card-5 .game-bg { background: linear-gradient(135deg, #1a1a0a 0%, #4d3d00 40%, #806000 70%, #1a1a0a 100%); }
+
+  /* Geometric pattern overlay */
+  .game-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.12;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.1) 0, rgba(255,255,255,0.1) 1px, transparent 0, transparent 50%);
+    background-size: 20px 20px;
+    transition: opacity 0.4s;
+  }
+
+  .game-card:hover .game-pattern { opacity: 0.25; }
+
+  /* Floating 3D cube icon */
+  .game-icon {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    animation: floatIcon 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px currentColor);
+  }
+
+  .game-card:first-child .game-icon {
+    width: 120px;
+    height: 120px;
+    font-size: 4rem;
+    top: 60px;
+    right: 60px;
+  }
+
+  @keyframes floatIcon {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(5deg); }
+  }
+
+  /* Glowing orb */
+  .game-orb {
+    position: absolute;
+    bottom: -60px;
+    left: -60px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    opacity: 0.25;
+    transition: opacity 0.4s, transform 0.4s;
+    filter: blur(40px);
+  }
+
+  .game-card:hover .game-orb {
+    opacity: 0.5;
+    transform: scale(1.3);
+  }
+
+  .game-card-1 .game-orb { background: var(--blue); }
+  .game-card-2 .game-orb { background: var(--red); }
+  .game-card-3 .game-orb { background: var(--green); }
+  .game-card-4 .game-orb { background: var(--magenta); }
+  .game-card-5 .game-orb { background: var(--gold); }
+
+  .game-content {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 40px;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+    transform: translateY(20px);
+    transition: transform 0.4s;
+  }
+
+  .game-card:hover .game-content { transform: translateY(0); }
+
+  .game-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    letter-spacing: 3px;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+
+  .game-card:first-child .game-name { font-size: 4rem; }
+
+  .game-desc {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.4s 0.1s;
+    letter-spacing: 0.5px;
+  }
+
+  .game-card:hover .game-desc {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .game-tag {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 1px;
+    font-size: 0.65rem;
+    font-family: 'Orbitron', monospace;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  /* ===================== FEATURES ===================== */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+
+  .feature-card {
+    padding: 40px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.07);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, background 0.3s;
+    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .feature-card:hover {
+    border-color: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.04);
+  }
+
+  .feature-card:hover::before { opacity: 1; }
+
+  .f1::before { background: linear-gradient(90deg, var(--cyan), var(--blue)); }
+  .f2::before { background: linear-gradient(90deg, var(--magenta), var(--red)); }
+  .f3::before { background: linear-gradient(90deg, var(--green), var(--cyan)); }
+  .f4::before { background: linear-gradient(90deg, var(--gold), var(--orange)); }
+  .f5::before { background: linear-gradient(90deg, var(--blue), var(--magenta)); }
+  .f6::before { background: linear-gradient(90deg, var(--red), var(--gold)); }
+
+  .feature-icon {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .feature-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+
+  .feature-text {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ===================== IP SECTION ===================== */
+  .ip-section {
+    position: relative;
+    z-index: 2;
+    padding: 140px 60px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .ip-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(0,255,255,0.07) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 50%, rgba(255,0,255,0.07) 0%, transparent 50%);
+  }
+
+  .ip-lines {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    opacity: 0.08;
+  }
+
+  .ip-lines::before, .ip-lines::after {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, var(--cyan), transparent);
+  }
+
+  .ip-lines::before { left: 25%; animation: scanLine 4s ease-in-out infinite; }
+  .ip-lines::after { right: 25%; animation: scanLine 4s ease-in-out infinite 2s; }
+
+  @keyframes scanLine {
+    0%, 100% { opacity: 0; transform: scaleY(0); }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
+
+  .ip-eyebrow {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 8px;
+    color: var(--cyan);
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .ip-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 7vw, 8rem);
+    line-height: 1;
+    margin-bottom: 20px;
+    background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.6) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    z-index: 2;
+  }
+
+  .ip-sub {
+    font-size: 1rem;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 70px;
+    position: relative;
+    z-index: 2;
+    text-transform: uppercase;
+    font-weight: 300;
+  }
+
+  /* The IP box */
+  .ip-box-container {
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+  }
+
+  /* Rotating border gradient */
+  .ip-box-ring {
+    position: absolute;
+    inset: -3px;
+    background: linear-gradient(var(--angle, 0deg), var(--cyan), var(--magenta), var(--gold), var(--green), var(--cyan));
+    border-radius: 4px;
+    animation: rotateBorder 3s linear infinite;
+    z-index: -1;
+  }
+
+  @property --angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+  }
+
+  @keyframes rotateBorder {
+    to { --angle: 360deg; }
+  }
+
+  .ip-box {
+    background: #050510;
+    padding: 50px 80px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    position: relative;
+  }
+
+  .ip-address {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(1.5rem, 4vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: 4px;
+    background: linear-gradient(90deg, var(--cyan), var(--magenta));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 30px rgba(0,255,255,0.5));
+  }
+
+  .divider-v {
+    width: 1px;
+    height: 40px;
+    background: rgba(255,255,255,0.15);
+  }
+
+  .copy-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, var(--cyan), var(--blue));
+    border: none;
+    color: #000;
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: none;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .copy-btn:hover {
+    filter: brightness(1.3) drop-shadow(0 0 20px var(--cyan));
+    transform: scale(1.05);
+  }
+
+  .copy-btn.copied {
+    background: linear-gradient(135deg, var(--green), #00aa66);
+  }
+
+  .copy-icon { font-size: 1rem; }
+
+  .copy-toast {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--green);
+    color: #000;
+    padding: 8px 20px;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  }
+
+  .copy-toast.show { opacity: 1; }
+
+  .ip-note {
+    margin-top: 30px;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ===================== FOOTER ===================== */
+  footer {
+    position: relative;
+    z-index: 2;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding: 60px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: 1.5rem;
+    letter-spacing: 4px;
+    background: linear-gradient(90deg, var(--cyan), var(--magenta));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 12px;
+  }
+
+  .footer-copy {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 2px;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 30px;
+  }
+
+  .footer-links a {
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .footer-links a:hover { color: var(--cyan); }
+
+  /* SEPARATOR */
+  .section-separator {
+    position: relative;
+    z-index: 2;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cyan), var(--magenta), var(--gold), transparent);
+    margin: 0;
+    opacity: 0.3;
+  }
+
+  /* KEYFRAMES */
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    nav { padding: 20px 30px; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .games-grid { grid-template-columns: 1fr 1fr; }
+    .game-card:first-child { grid-row: span 1; min-height: 380px; }
+    .features-grid { grid-template-columns: 1fr 1fr; }
+    .section { padding: 80px 30px; }
+    .ip-box { padding: 30px 40px; }
+  }
+
+  @media (max-width: 600px) {
+    .games-grid { grid-template-columns: 1fr; }
+    .features-grid { grid-template-columns: 1fr; }
+    .stats-bar { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+    .ip-box { flex-direction: column; padding: 30px; }
+    footer { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<canvas id="canvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">LEGACY NETWORK</div>
+  <ul class="nav-links">
+    <li><a href="#gamemodes">Gamemodes</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#join">Join</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="grid-floor"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-badge">⚡ The #1 Minecraft Network</div>
+  <h1 class="hero-title">
+    <span class="word-legacy">Legacy</span>
+    <span class="word-network">Network</span>
+  </h1>
+  <p class="hero-sub">Where Legends Are Made &nbsp;•&nbsp; Bedwars &nbsp;•&nbsp; Survival &nbsp;•&nbsp; And More</p>
+  <div class="hero-cta">
+    <a href="#join" class="btn-primary">Join Now</a>
+    <a href="#gamemodes" class="btn-secondary">Explore Modes →</a>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-number">50K+</div>
+    <div class="stat-label">Players Online</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">12</div>
+    <div class="stat-label">Game Modes</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">99.9%</div>
+    <div class="stat-label">Uptime</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">5★</div>
+    <div class="stat-label">Player Rating</div>
+  </div>
+</div>
+
+<div class="section-separator"></div>
+
+<!-- GAMEMODES -->
+<section class="section" id="gamemodes">
+  <div class="section-tag">Game Modes</div>
+  <h2 class="section-title">Choose Your<br>Battleground</h2>
+  <p class="section-desc">Five elite game modes engineered for maximum intensity. Every match, a new legend is born.</p>
+
+  <div class="games-grid">
+    <!-- BedWars — hero card -->
+    <div class="game-card game-card-1">
+      <div class="game-bg"></div>
+      <div class="game-pattern"></div>
+      <div class="game-orb"></div>
+      <div class="game-icon" style="color: var(--blue);">🛏️</div>
+      <div class="game-content">
+        <div class="game-tag" style="background: rgba(0,136,255,0.2); color: var(--blue); border: 1px solid rgba(0,136,255,0.4);">🔥 Most Popular</div>
+        <div class="game-name" style="color: var(--blue);">BedWars</div>
+        <div class="game-desc">Defend your bed. Destroy theirs. The ultimate team strategy experience — upgrade, fight, survive. The most legendary game mode on Legacy Network.</div>
+      </div>
+    </div>
+
+    <div class="game-card game-card-2">
+      <div class="game-bg"></div>
+      <div class="game-pattern"></div>
+      <div class="game-orb"></div>
+      <div class="game-icon" style="color: var(--red);">⚔️</div>
+      <div class="game-content">
+        <div class="game-tag" style="background: rgba(255,34,68,0.2); color: var(--red); border: 1px solid rgba(255,34,68,0.4);">PvP</div>
+        <div class="game-name" style="color: var(--red);">SkyWars</div>
+        <div class="game-desc">Battle on floating islands. Last one standing wins glory.</div>
+      </div>
+    </div>
+
+    <div class="game-card game-card-3">
+      <div class="game-bg"></div>
+      <div class="game-pattern"></div>
+      <div class="game-orb"></div>
+      <div class="game-icon" style="color: var(--green);">🌿</div>
+      <div class="game-content">
+        <div class="game-tag" style="background: rgba(0,255,136,0.2); color: var(--green); border: 1px solid rgba(0,255,136,0.4);">Open World</div>
+        <div class="game-name" style="color: var(--green);">Survival</div>
+        <div class="game-desc">Build, explore, conquer. The world is yours.</div>
+      </div>
+    </div>
+
+    <div class="game-card game-card-4">
+      <div class="game-bg"></div>
+      <div class="game-pattern"></div>
+      <div class="game-orb"></div>
+      <div class="game-icon" style="color: var(--magenta);">🏰</div>
+      <div class="game-content">
+        <div class="game-tag" style="background: rgba(255,0,255,0.2); color: var(--magenta); border: 1px solid rgba(255,0,255,0.4);">Strategy</div>
+        <div class="game-name" style="color: var(--magenta);">Factions</div>
+        <div class="game-desc">Form alliances. Wage war. Rule the server.</div>
+      </div>
+    </div>
+
+    <div class="game-card game-card-5">
+      <div class="game-bg"></div>
+      <div class="game-pattern"></div>
+      <div class="game-orb"></div>
+      <div class="game-icon" style="color: var(--gold);">🏆</div>
+      <div class="game-content">
+        <div class="game-tag" style="background: rgba(255,215,0,0.2); color: var(--gold); border: 1px solid rgba(255,215,0,0.4);">Competitive</div>
+        <div class="game-name" style="color: var(--gold);">UHC</div>
+        <div class="game-desc">No regeneration. Pure skill. Ultimate glory.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-separator"></div>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div class="section-tag">Why Legacy?</div>
+  <h2 class="section-title">Built for<br>Champions</h2>
+  <p class="section-desc">Every pixel of Legacy Network is engineered to give you the best Minecraft experience on the planet.</p>
+
+  <div class="features-grid">
+    <div class="feature-card f1">
+      <div class="feature-icon">⚡</div>
+      <div class="feature-title">Ultra Low Ping</div>
+      <div class="feature-text">World-class servers with sub-10ms latency. No lag, no excuses — just pure, fluid gameplay where every millisecond counts.</div>
+    </div>
+    <div class="feature-card f2">
+      <div class="feature-icon">🏆</div>
+      <div class="feature-title">Ranked Seasons</div>
+      <div class="feature-text">Climb the ranks from Iron to Grandmaster. Seasonal resets keep competition fierce and rewards exclusive.</div>
+    </div>
+    <div class="feature-card f3">
+      <div class="feature-icon">🎮</div>
+      <div class="feature-title">Custom Anti-Cheat</div>
+      <div class="feature-text">Our proprietary detection system bans cheaters instantly. Fair play is guaranteed on every single server.</div>
+    </div>
+    <div class="feature-card f4">
+      <div class="feature-icon">💎</div>
+      <div class="feature-title">Cosmetics & Ranks</div>
+      <div class="feature-text">Hundreds of exclusive skins, cloaks, trails, and win effects. Stand out and flex your legacy in every match.</div>
+    </div>
+    <div class="feature-card f5">
+      <div class="feature-icon">🌍</div>
+      <div class="feature-title">Global Community</div>
+      <div class="feature-text">Players from 80+ countries united under one server. Make friends, form parties, and play together forever.</div>
+    </div>
+    <div class="feature-card f6">
+      <div class="feature-icon">🔧</div>
+      <div class="feature-title">Constant Updates</div>
+      <div class="feature-text">New maps, modes, and events every week. Legacy Network never sleeps — and neither does the hype.</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-separator"></div>
+
+<!-- IP SECTION -->
+<section class="ip-section" id="join">
+  <div class="ip-bg"></div>
+  <div class="ip-lines"></div>
+
+  <div class="ip-eyebrow">Ready to Play?</div>
+  <h2 class="ip-headline">Join The<br>Legacy</h2>
+  <p class="ip-sub">Open Minecraft · Multiplayer · Add Server · Paste IP · Enter Glory</p>
+
+  <div class="ip-box-container">
+    <div class="ip-box-ring"></div>
+    <div class="ip-box">
+      <span class="ip-address">in.rexacloud.fun</span>
+      <div class="divider-v"></div>
+      <button class="copy-btn" id="copyBtn" onclick="copyIP()">
+        <span class="copy-icon">📋</span>
+        <span id="copyText">Copy IP</span>
+        <div class="copy-toast" id="toast">✓ Copied!</div>
+      </button>
+    </div>
+  </div>
+
+  <p class="ip-note">Java Edition · Bedrock Edition · All versions welcome</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">LEGACY NETWORK</div>
+    <div class="footer-copy">© 2025 Legacy Network. All rights reserved. Where legends are made.</div>
+  </div>
+  <div class="footer-links">
+    <a href="#">Discord</a>
+    <a href="#">Store</a>
+    <a href="#">Rules</a>
+    <a href="#">Support</a>
+  </div>
+</footer>
+
+<script>
+// ========== CURSOR ==========
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx + 'px';
+  cursor.style.top = my + 'px';
+});
+
+(function animateRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) *.12;
+  ring.style.left = rx + 'px';
+  ring.style.top = ry + 'px';
+  requestAnimationFrame(animateRing);
+})();
+
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform = 'translate(-50%,-50%) scale(2)';
+    ring.style.transform = 'translate(-50%,-50%) scale(1.5)';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+    ring.style.transform = 'translate(-50%,-50%) scale(1)';
+  });
+});
+
+// ========== PARTICLES ==========
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [];
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const COLORS = ['#00FFFF', '#FF00FF', '#FFD700', '#00FF88', '#FF6600', '#0088FF', '#FF2244'];
+
+class Particle {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = Math.random() * W;
+    this.y = Math.random() * H;
+    this.size = Math.random() * 2 + 0.3;
+    this.speedX = (Math.random() - 0.5) * 0.4;
+    this.speedY = (Math.random() - 0.5) * 0.4;
+    this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+    this.opacity = Math.random() * 0.6 + 0.1;
+    this.life = Math.random();
+    this.lifeSpeed = Math.random() * 0.003 + 0.001;
+  }
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    this.life += this.lifeSpeed;
+    if (this.life > 1 || this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.reset();
+    this.opacity = Math.sin(this.life * Math.PI) * 0.5;
+  }
+  draw() {
+    ctx.save();
+    ctx.globalAlpha = this.opacity;
+    ctx.fillStyle = this.color;
+    ctx.shadowColor = this.color;
+    ctx.shadowBlur = 6;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+for (let i = 0; i < 180; i++) particles.push(new Particle());
+
+// Connection lines
+function drawConnections() {
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 100) {
+        const alpha = (1 - dist / 100) * 0.06;
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.strokeStyle = particles[i].color;
+        ctx.lineWidth = 0.5;
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.stroke();
+        ctx.restore();
+      }
+    }
+  }
+}
+
+function animate() {
+  ctx.clearRect(0, 0, W, H);
+  drawConnections();
+  particles.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(animate);
+}
+animate();
+
+// ========== COPY IP ==========
+function copyIP() {
+  const ip = 'in.rexacloud.fun';
+  navigator.clipboard.writeText(ip).then(() => {
+    const btn = document.getElementById('copyBtn');
+    const text = document.getElementById('copyText');
+    const toast = document.getElementById('toast');
+    btn.classList.add('copied');
+    text.textContent = 'Copied!';
+    toast.classList.add('show');
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      text.textContent = 'Copy IP';
+      toast.classList.remove('show');
+    }, 2000);
+  }).catch(() => {
+    // fallback
+    const ta = document.createElement('textarea');
+    ta.value = ip;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    document.getElementById('copyText').textContent = 'Copied!';
+    setTimeout(() => document.getElementById('copyText').textContent = 'Copy IP', 2000);
+  });
+}
+
+// ========== SCROLL ANIMATIONS ==========
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.game-card, .feature-card, .stat-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(30px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  observer.observe(el);
+});
+
+// Stagger game cards
+document.querySelectorAll('.game-card').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.1) + 's';
+});
+document.querySelectorAll('.feature-card').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.08) + 's';
+});
+</script>
+</body>
+</html>
