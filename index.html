@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RexaCloud — Premium Game & Cloud Hosting</title>
+    <meta name="description"
+        content="RexaCloud offers premium game server hosting, VPS, and web hosting with 99.9% uptime, DDoS protection, and 24/7 support. Start from ₹89/mo." />
+    <meta name="keywords"
+        content="game hosting, minecraft hosting, VPS hosting, web hosting India, game server, RexaCloud" />
+    <link rel="icon" href="logo.png" type="image/png" />
+
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css" />
+    <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+</head>
+
+<body>
+
+    <canvas id="starfield"></canvas>
+    <div class="aurora">
+        <div class="aurora-blob ab1"></div>
+        <div class="aurora-blob ab2"></div>
+        <div class="aurora-blob ab3"></div>
+    </div>
+
+    <!-- ANNOUNCEMENT -->
+    <div class="ann" id="ann">
+        <i class="ri-megaphone-fill"></i> Launch Offer: <strong>30% OFF</strong> all plans · Use code <a
+            href="#pricing">REXA30</a> · Limited time only! Join our Discord for more offers
+        <button class="ann-close" id="annClose">×</button>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="nav ann-visible" id="nav">
+        <div class="nav-in">
+            <a href="#" class="logo">
+                <div class="logo-icon"><img src="logo.png" alt="RexaCloud Logo"
+                        style="width:100%;height:100%;object-fit:cover;border-radius:6px;" /></div>RexaCloud
+            </a>
+            <ul class="nav-links">
+                <li><a href="#games">Games</a></li>
+                <li class="dd"><a href="#">Services</a>
+                    <ul class="dd-menu">
+                        <li><a href="#games"><i class="ri-gamepad-fill"></i> Game Servers</a></li>
+                        <li><a href="#pricing"><i class="ri-server-fill"></i> VPS Hosting</a></li>
+                        <li><a href="#pricing"><i class="ri-global-fill"></i> Web Hosting</a></li>
+                    </ul>
+                </li>
+                <li><a href="#panel">Our Panel</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#calculator">Plan Finder</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#discord">Discord</a></li>
+            </ul>
+            <div class="nav-cta">
+                <a href="dashboard.html" class="btn btn-ghost btn-sm">Login / Client Area</a>
+                <a href="#pricing" class="btn btn-p btn-sm">Get Started</a>
+            </div>
+            <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div class="mob-menu" id="mobMenu">
+        <a href="#games" onclick="closeMob()">Games</a>
+        <a href="#panel" onclick="closeMob()">Our Panel</a>
+        <a href="#pricing" onclick="closeMob()">Pricing</a>
+        <a href="#calculator" onclick="closeMob()">Plan Finder</a>
+        <a href="#discord" onclick="closeMob()">Discord</a>
+        <a href="#faq" onclick="closeMob()">FAQ</a>
+        <div class="mob-bottom">
+            <a href="#" class="btn btn-ghost" onclick="closeMob()">Login</a>
+            <a href="#pricing" class="btn btn-p" onclick="closeMob()">Get Started →</a>
+        </div>
+    </div>
+
+    <!-- ===== HERO ===== -->
+    <section id="hero">
+        <div class="hero-bg"
+            style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:-2; background-image: url('img/hero/underwater.jpg'); background-size:cover; background-position:center;">
+            <div class="hero-overlay"
+                style="position:absolute; inset:0; background: linear-gradient(90deg, rgba(3,7,18,0.95) 0%, rgba(3,7,18,0.7) 100%);">
+            </div>
+        </div>
+
+        <div class="hero-glow hg1" style="z-index: 1;"></div>
+        <div class="hero-glow hg2" style="z-index: 1;"></div>
+
+        <div class="hero-in"
+            style="justify-content:space-between; max-width:1200px; margin:0 auto; position:relative; z-index:10; display:flex; align-items:center; flex-wrap: wrap;">
+
+            <!-- Left Side: Text Content -->
+            <div style="flex:1; max-width:640px; text-align:left;">
+                <div class="hero-badge" style="margin:0 0 24px 0;"><span class="pulse"></span>Now Serving 1,200+ Active
+                    Servers</div>
+                <h1 class="hero-title" style="font-size: clamp(48px, 6vw, 76px); line-height: 1.1;">Power
+                    Your<br />World With<br /><span class="gt">RexaCloud</span></h1>
+                <p class="hero-desc" style="margin:24px 0; max-width:540px;">Premium Minecraft server & cloud hosting
+                    built for Indian gamers and creators.
+                    Lightning-fast NVMe SSDs, full DDoS protection, 99.9% uptime — starting at just ₹50/mo.</p>
+                <div class="hero-cta" style="justify-content:flex-start; margin-bottom:48px;">
+                    <a href="#pricing" class="btn btn-a btn-lg"><i class="ri-rocket-2-fill"></i> Start Hosting</a>
+                    <a href="#games" class="btn btn-o btn-lg"><i class="ri-gamepad-line"></i> Browse Games</a>
+                </div>
+                <div class="hero-stats" style="justify-content:flex-start; gap:32px;">
+                    <div>
+                        <div class="hstat-val">99.9%</div>
+                        <div class="hstat-lbl">Uptime SLA</div>
+                    </div>
+                    <div>
+                        <div class="hstat-val">&lt;25ms</div>
+                        <div class="hstat-lbl">Avg. Latency</div>
+                    </div>
+                    <div>
+                        <div class="hstat-val">1,200+</div>
+                        <div class="hstat-lbl">Active Servers</div>
+                    </div>
+                    <div>
+                        <div class="hstat-val">24/7</div>
+                        <div class="hstat-lbl">Live Support</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Rotating Emojis -->
+            <div
+                style="flex:1; display:flex; justify-content:center; align-items:center; position:relative; min-height: 500px; min-width: 300px;">
+                <div class="hero-emojis" style="position:relative; width:0; height:0;">
+                    <!-- 8 revolving emojis representing plan features -->
+                    <div class="orbit-wrap" style="--rotation: 0deg;"><span class="emoji">👾</span></div>
+                    <div class="orbit-wrap" style="--rotation: 45deg;"><span class="emoji">🖥️</span></div>
+                    <div class="orbit-wrap" style="--rotation: 90deg;"><span class="emoji">⚙️</span></div>
+                    <div class="orbit-wrap" style="--rotation: 135deg;"><span class="emoji">💾</span></div>
+                    <div class="orbit-wrap" style="--rotation: 180deg;"><span class="emoji">☁️</span></div>
+                    <div class="orbit-wrap" style="--rotation: 225deg;"><span class="emoji">🔌</span></div>
+                    <div class="orbit-wrap" style="--rotation: 270deg;"><span class="emoji">🗄️</span></div>
+                    <div class="orbit-wrap" style="--rotation: 315deg;"><span class="emoji">⚡</span></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- STATS BAR -->
+    <div class="stats-bar">
+        <div class="stats-bar-in">
+            <div class="sbar-item" data-r>
+                <div class="sbar-icon"><i class="ri-rocket-2-fill ri-xl"></i></div>
+                <div class="sbar-num">99.9%</div>
+                <div class="sbar-lbl">Guaranteed Uptime</div>
+            </div>
+            <div class="sbar-item" data-r data-rd="2">
+                <div class="sbar-icon"><i class="ri-flashlight-fill ri-xl"></i></div>
+                <div class="sbar-num">&lt;25ms</div>
+                <div class="sbar-lbl">Average Latency</div>
+            </div>
+            <div class="sbar-item" data-r data-rd="3">
+                <div class="sbar-icon"><i class="ri-shield-check-fill ri-xl"></i></div>
+                <div class="sbar-num">1Tbps+</div>
+                <div class="sbar-lbl">DDoS Protection</div>
+            </div>
+            <div class="sbar-item" data-r data-rd="4">
+                <div class="sbar-icon"><i class="ri-headphone-fill ri-xl"></i></div>
+                <div class="sbar-num">24/7</div>
+                <div class="sbar-lbl">Expert Support</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GAMES SECTION -->
+    <section id="games" class="section">
+        <div class="container">
+            <div class="tc" data-r>
+                <span class="label"><i class="ri-gamepad-fill"></i> Game Hosting</span>
+                <h2 class="title">Your Favourite Games,<br /><span class="gt">Perfectly Hosted</span></h2>
+                <p class="subtitle">Deploy your game server in under 30 seconds with one-click installers, mod support,
+                    and full panel access.</p>
+            </div>
+            <div class="games-grid" style="grid-template-columns: 1fr;max-width:500px;margin:52px auto 0;">
+                <div class="game-card" data-r data-rd="1">
+                    <div class="gc-img"><img
+                            src="https://cdn.cloudflare.steamstatic.com/steam/apps/2521900/capsule_616x353.jpg"
+                            alt="Minecraft" loading="lazy"
+                            onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#1a3a1a,#2d5a20)';this.parentElement.innerHTML+='<div style=\'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:72px;z-index:1;\'>⛏️</div>';" />
+                    </div>
+                    <div class="gc-body">
+                        <div class="gc-name">Minecraft</div>
+                        <div class="gc-desc">Java &amp; Bedrock edition, modpacks, Spigot, Paper, Forge, Fabric — all
+                            supported out of the box. Budget Beasts from ₹35/mo, Powerhouse from ₹99/mo.</div>
+                        <div class="gc-meta">
+                            <div class="gc-price">From <span>₹35/mo</span></div><span class="tag tag-pop"><i
+                                    class="ri-fire-fill"></i> Popular</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="games-coming" data-r style="margin-top:32px;text-align:center;">
+                <div class="coming-soon-box">
+                    <i class="ri-time-fill"
+                        style="font-size:28px;color:var(--cyan);margin-bottom:10px;display:block;"></i>
+                    <div style="font-family:var(--f2);font-size:18px;font-weight:700;margin-bottom:6px;">More Games
+                        Coming Soon!</div>
+                    <div style="color:var(--t2);font-size:14px;">ARK, Rust, CS2, Valheim &amp; more — stay tuned. Join
+                        our Discord for early access.</div>
+                    <a href="https://discord.gg/T9kzKF8J" target="_blank" class="btn btn-o" style="margin-top:16px;"><i
+                            class="ri-discord-fill"></i> Join
+                        Discord for Updates</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- OUR PANEL (EnderCloud style) -->
+    <section id="panel" class="section sec-alt">
+        <div class="container">
+            <div class="tc" data-r>
+                <span class="label"><i class="ri-monitor-fill"></i> Our Panel</span>
+                <h2 class="title">Experience Our <span class="gt">Platform</span></h2>
+                <p class="subtitle">Discover the powerful features that make our platform the perfect choice for your
+                    needs.</p>
+            </div>
+            <div class="panel-in">
+                <div class="panel-tabs">
+                    <div class="ptab active" data-panel="dashboard" data-r data-rd="1">
+                        <div class="ptab-icon"><i class="ri-dashboard-3-fill"></i></div>
+                        <div>
+                            <div class="ptab-title">Main Dashboard</div>
+                            <div class="ptab-desc">View real-time RAM, CPU, and storage usage, system status, and quick
+                                controls in one clean interface.</div>
+                        </div>
+                    </div>
+                    <div class="ptab" data-panel="console" data-r data-rd="2">
+                        <div class="ptab-icon"><i class="ri-terminal-box-fill"></i></div>
+                        <div>
+                            <div class="ptab-title">Server Console</div>
+                            <div class="ptab-desc">Monitor server status, resource usage, activity logs and quick
+                                controls in a simple live dashboard.</div>
+                        </div>
+                    </div>
+                    <div class="ptab" data-panel="files" data-r data-rd="3">
+                        <div class="ptab-icon"><i class="ri-folder-3-fill"></i></div>
+                        <div>
+                            <div class="ptab-title">File Manager</div>
+                            <div class="ptab-desc">Browse, upload, edit and manage server files directly from your
+                                browser with full SFTP access.</div>
+                        </div>
+                    </div>
+                    <div class="ptab" data-panel="plugins" data-r data-rd="4">
+                        <div class="ptab-icon"><i class="ri-plug-fill"></i></div>
+                        <div>
+                            <div class="ptab-title">One-Click Plugin Installer</div>
+                            <div class="ptab-desc">Install and manage plugins instantly with our one-click installer —
+                                no manual setup needed.</div>
+                        </div>
+                    </div>
+                    <div class="ptab" data-panel="props" data-r data-rd="5">
+                        <div class="ptab-icon"><i class="ri-settings-4-fill"></i></div>
+                        <div>
+                            <div class="ptab-title">Server Properties</div>
+                            <div class="ptab-desc">Quickly edit server properties to adjust game rules, performance
+                                settings, and world configuration.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-mockup" data-r data-rd="2">
+                    <div class="panel-frame">
+                        <div class="pf-topbar">
+                            <div class="pf-dot red"></div>
+                            <div class="pf-dot yellow"></div>
+                            <div class="pf-dot green"></div>
+                            <div class="pf-url">panel.rexacloud.in</div>
+                        </div>
+                        <div class="pf-body">
+                            <!-- Dashboard -->
+                            <div class="panel-view active" id="pv-dashboard">
+                                <div class="pmock-header">
+                                    <div class="pmock-title">📊 Server Overview</div>
+                                    <div class="pmock-status online">● Online</div>
+                                </div>
+                                <div class="pmock-stats">
+                                    <div class="pmock-stat">
+                                        <div class="pmock-stat-lbl">CPU Usage</div>
+                                        <div class="pmock-stat-val g">12%</div>
+                                    </div>
+                                    <div class="pmock-stat">
+                                        <div class="pmock-stat-lbl">RAM Used</div>
+                                        <div class="pmock-stat-val a">3.2 / 6 GB</div>
+                                    </div>
+                                    <div class="pmock-stat">
+                                        <div class="pmock-stat-lbl">Disk Used</div>
+                                        <div class="pmock-stat-val p">18 / 40 GB</div>
+                                    </div>
+                                </div>
+                                <div class="pmock-btns">
+                                    <button class="pmock-btn start">▶ Start</button>
+                                    <button class="pmock-btn restart">↺ Restart</button>
+                                    <button class="pmock-btn stop">■ Stop</button>
+                                </div>
+                                <div class="pmock-console">
+                                    <p>[INFO] Server started on port 25565</p>
+                                    <p class="c-info">[INFO] Loading world "SkyBlock"...</p>
+                                    <p class="c-info">[INFO] Done (2.3s)! Type "help" for help.</p>
+                                    <p>[JOIN] Player_Rahul joined the game</p>
+                                    <p>[JOIN] Player_Ananya joined the game</p>
+                                </div>
+                            </div>
+                            <!-- Console -->
+                            <div class="panel-view" id="pv-console">
+                                <div class="pmock-header">
+                                    <div class="pmock-title">⌨️ Live Console</div>
+                                    <div class="pmock-status online">● Running</div>
+                                </div>
+                                <div class="pmock-console" style="height:160px;">
+                                    <p>[21:03:12] [Server] INFO: Starting Minecraft server...</p>
+                                    <p class="c-info">[21:03:13] Loading plugins: EssentialsX, LuckPerms</p>
+                                    <p>[21:03:14] [Server] INFO: Done! 12 plugins loaded</p>
+                                    <p class="c-warn">[21:03:20] [WARN] TPS slightly low: 18.6</p>
+                                    <p>[21:03:45] Player_Varun has joined.</p>
+                                    <p class="c-info">[21:04:01] Autosave completed.</p>
+                                </div>
+                                <div style="display:flex;gap:8px;margin-top:12px;">
+                                    <input
+                                        style="flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:8px 12px;color:#f1f5f9;font-size:12px;outline:none;"
+                                        placeholder="Enter command..." readonly />
+                                    <button class="pmock-btn start" style="padding:6px 16px;">Send</button>
+                                </div>
+                            </div>
+                            <!-- Files -->
+                            <div class="panel-view" id="pv-files">
+                                <div class="pmock-header">
+                                    <div class="pmock-title">📁 File Manager</div>
+                                    <div class="pmock-status online">/ (root)</div>
+                                </div>
+                                <div class="pmock-files">
+                                    <div class="pmock-file">
+                                        <div class="pmock-file-icon">📂</div><span>plugins/</span><span
+                                            style="margin-left:auto;font-size:10px;color:var(--t3)">DIR</span>
+                                    </div>
+                                    <div class="pmock-file">
+                                        <div class="pmock-file-icon">📂</div><span>world/</span><span
+                                            style="margin-left:auto;font-size:10px;color:var(--t3)">DIR</span>
+                                    </div>
+                                    <div class="pmock-file">
+                                        <div class="pmock-file-icon">📄</div><span>server.properties</span><span
+                                            style="margin-left:auto;font-size:10px;color:var(--t3)">4.2 KB</span>
+                                    </div>
+                                    <div class="pmock-file">
+                                        <div class="pmock-file-icon">📄</div><span>server.jar</span><span
+                                            style="margin-left:auto;font-size:10px;color:var(--t3)">42 MB</span>
+                                    </div>
+                                    <div class="pmock-file">
+                                        <div class="pmock-file-icon">📄</div><span>eula.txt</span><span
+                                            style="margin-left:auto;font-size:10px;color:var(--t3)">0.2 KB</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Plugins -->
+                            <div class="panel-view" id="pv-plugins">
+                                <div class="pmock-header">
+                                    <div class="pmock-title">🔌 Plugin Installer</div>
+                                    <div class="pmock-status online">12 Active</div>
+                                </div>
+                                <div class="pmock-plugin-grid">
+                                    <div class="pmock-plugin">
+                                        <div class="pmock-plugin-name">EssentialsX</div>
+                                        <div class="pmock-plugin-tag">✓ Installed</div>
+                                    </div>
+                                    <div class="pmock-plugin">
+                                        <div class="pmock-plugin-name">LuckPerms</div>
+                                        <div class="pmock-plugin-tag">✓ Installed</div>
+                                    </div>
+                                    <div class="pmock-plugin">
+                                        <div class="pmock-plugin-name">WorldEdit</div>
+                                        <div class="pmock-plugin-tag">✓ Installed</div>
+                                    </div>
+                                    <div class="pmock-plugin">
+                                        <div class="pmock-plugin-name">Vault</div>
+                                        <div class="pmock-plugin-tag">✓ Installed</div>
+                                    </div>
+                                    <div class="pmock-plugin">
+                                        <div class="pmock-plugin-name">DiscordSRV</div>
+                                        <div class="pmock-plugin-tag" style="color:var(--amber)">+ Install</div>
+                                    </div>
+                                    <div class="pmock-plugin">
+                                        <div class="pmock-plugin-name">CoreProtect</div>
+                                        <div class="pmock-plugin-tag" style="color:var(--amber)">+ Install</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Props -->
+                            <div class="panel-view" id="pv-props">
+                                <div class="pmock-header">
+                                    <div class="pmock-title">⚙️ Server Properties</div>
+                                    <div class="pmock-status online">Editable</div>
+                                </div>
+                                <div class="pmock-props">
+                                    <div class="pmock-prop"><span class="pmock-prop-key">max-players</span><span
+                                            class="pmock-prop-val">20</span></div>
+                                    <div class="pmock-prop"><span class="pmock-prop-key">gamemode</span><span
+                                            class="pmock-prop-val">survival</span></div>
+                                    <div class="pmock-prop"><span class="pmock-prop-key">difficulty</span><span
+                                            class="pmock-prop-val">normal</span></div>
+                                    <div class="pmock-prop"><span class="pmock-prop-key">level-name</span><span
+                                            class="pmock-prop-val">world</span></div>
+                                    <div class="pmock-prop"><span class="pmock-prop-key">pvp</span><span
+                                            class="pmock-prop-val">true</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="section">
+        <div class="container">
+            <div class="tc" data-r>
+                <span class="label"><i class="ri-sparkling-2-fill"></i> Why RexaCloud</span>
+                <h2 class="title">Everything You Need,<br /><span class="gt">Nothing You Don't</span></h2>
+                <p class="subtitle">Enterprise-grade infrastructure at gamer-friendly prices.</p>
+            </div>
+            <div class="feat-grid">
+                <div class="feat-card" data-r data-rd="1">
+                    <div class="feat-icon fi-r"><i class="ri-shield-check-fill ri-lg"></i></div>
+                    <div class="feat-title">Enterprise DDoS Protection</div>
+                    <div class="feat-desc">1Tbps+ capacity DDoS mitigation at the network level. Your server stays
+                        online, always.</div>
+                </div>
+                <div class="feat-card" data-r data-rd="2">
+                    <div class="feat-icon fi-p"><i class="ri-flashlight-fill ri-lg"></i></div>
+                    <div class="feat-title">NVMe SSD Storage</div>
+                    <div class="feat-desc">Gen4 NVMe SSDs delivering up to 7,000 MB/s read speeds. Zero lag world
+                        loading.</div>
+                </div>
+                <div class="feat-card" data-r data-rd="3">
+                    <div class="feat-icon fi-c"><i class="ri-global-fill ri-lg"></i></div>
+                    <div class="feat-title">Global CDN Network</div>
+                    <div class="feat-desc">8 data centers across India and Southeast Asia for ultra-low ping wherever
+                        players are.</div>
+                </div>
+                <div class="feat-card" data-r data-rd="1">
+                    <div class="feat-icon fi-g"><i class="ri-rocket-2-fill ri-lg"></i></div>
+                    <div class="feat-title">Instant Deployment</div>
+                    <div class="feat-desc">Your server goes live in under 30 seconds. One-click installers for 30+
+                        games.</div>
+                </div>
+                <div class="feat-card" data-r data-rd="2">
+                    <div class="feat-icon fi-a"><i class="ri-cpu-fill ri-lg"></i></div>
+                    <div class="feat-title">Free Pterodactyl Panel</div>
+                    <div class="feat-desc">Full-featured game panel with file manager, console, scheduling, and sub-user
+                        access — free.</div>
+                </div>
+                <div class="feat-card" data-r data-rd="3">
+                    <div class="feat-icon fi-b"><i class="ri-headphone-fill ri-lg"></i></div>
+                    <div class="feat-title">24/7 Human Support</div>
+                    <div class="feat-desc">Real people, not bots. Average response time under 10 minutes via Discord and
+                        tickets.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECH / INFRASTRUCTURE -->
+    <section id="tech" class="section sec-alt">
+        <div class="container">
+            <div class="tc" data-r>
+                <span class="label"><i class="ri-tools-fill"></i> Infrastructure</span>
+                <h2 class="title">Built on <span class="gt">Enterprise Hardware</span></h2>
+                <p class="subtitle">Every server runs on carefully selected, high-end hardware to give you a competitive
+                    edge.</p>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-card" data-r data-rd="1"><i class="ri-cpu-fill tech-icon"></i>
+                    <div class="tech-name">Processor</div>
+                    <div class="tech-val">AMD Ryzen 9</div>
+                    <div class="tech-desc">7950X / 9950X · Up to 5.7 GHz boost</div>
+                </div>
+                <div class="tech-card" data-r data-rd="2"><i class="ri-database-2-fill tech-icon"></i>
+                    <div class="tech-name">Memory</div>
+                    <div class="tech-val">DDR5 ECC</div>
+                    <div class="tech-desc">Up to 192 GB · Error-correcting · 4800 MHz</div>
+                </div>
+                <div class="tech-card" data-r data-rd="3"><i class="ri-hard-drive-2-fill tech-icon"></i>
+                    <div class="tech-name">Storage</div>
+                    <div class="tech-val">Gen4 NVMe</div>
+                    <div class="tech-desc">7000 MB/s read · Samsung 990 PRO</div>
+                </div>
+                <div class="tech-card" data-r data-rd="4"><i class="ri-wifi-fill tech-icon"></i>
+                    <div class="tech-name">Network</div>
+                    <div class="tech-val">10 Gbps</div>
+                    <div class="tech-desc">Unmetered bandwidth · 1Tbps+ DDoS filter</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PERFORMANCE -->
+    <section id="performance" class="section">
+        <div class="container">
+            <div class="perf-in">
+                <div data-r>
+                    <span class="label"><i class="ri-bar-chart-grouped-fill"></i> Performance</span>
+                    <h2 class="title">Built for<br /><span class="gt">Blazing Speed</span></h2>
+                    <p class="subtitle" style="margin-bottom:38px;">We obsess over metrics so your players never feel a
+                        hiccup.</p>
+                    <div class="perf-bars">
+                        <div class="pb-item">
+                            <div class="pb-head"><span class="pb-name">Network Uptime</span><span
+                                    class="pb-val">99.9%</span></div>
+                            <div class="pb-track">
+                                <div class="pb-fill" data-w="99.9"></div>
+                            </div>
+                        </div>
+                        <div class="pb-item">
+                            <div class="pb-head"><span class="pb-name">NVMe Disk Speed</span><span class="pb-val">7
+                                    GB/s</span></div>
+                            <div class="pb-track">
+                                <div class="pb-fill a" data-w="95"></div>
+                            </div>
+                        </div>
+                        <div class="pb-item">
+                            <div class="pb-head"><span class="pb-name">DDoS Mitigation</span><span class="pb-val">1
+                                    Tbps+</span></div>
+                            <div class="pb-track">
+                                <div class="pb-fill c" data-w="100"></div>
+                            </div>
+                        </div>
+                        <div class="pb-item">
+                            <div class="pb-head"><span class="pb-name">Support Response</span><span
+                                    class="pb-val">&lt;10 min</span></div>
+                            <div class="pb-track">
+                                <div class="pb-fill" data-w="90"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div data-r data-rd="3">
+                    <div class="net-map">
+                        <div class="nm-head"><i class="ri-map-pin-2-fill"></i> Server Locations</div>
+                        <div class="nm-grid">
+                            <div class="nm-node">
+                                <div class="nm-flag">🇮🇳</div>
+                                <div class="nm-name">Mumbai</div>
+                                <div class="nm-ping">~12ms</div>
+                            </div>
+                            <div class="nm-node">
+                                <div class="nm-flag">🇮🇳</div>
+                                <div class="nm-name">Delhi</div>
+                                <div class="nm-ping">~15ms</div>
+                            </div>
+                            <div class="nm-node">
+                                <div class="nm-flag">🇮🇳</div>
+                                <div class="nm-name">Bangalore</div>
+                                <div class="nm-ping">~18ms</div>
+                            </div>
+                            <div class="nm-node">
+                                <div class="nm-flag">🇸🇬</div>
+                                <div class="nm-name">Singapore</div>
+                                <div class="nm-ping y">~42ms</div>
+                            </div>
+                            <div class="nm-node">
+                                <div class="nm-flag">🇯🇵</div>
+                                <div class="nm-name">Tokyo</div>
+                                <div class="nm-ping y">~80ms</div>
+                            </div>
+                            <div class="nm-node">
+                                <div class="nm-flag">🇩🇪</div>
+                                <div class="nm-name">Frankfurt</div>
+                                <div class="nm-ping y">~110ms</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="section sec-alt">
+        <div class="container">
+            <div class="tc" data-r>
+                <span class="label"><i class="ri-price-tag-3-fill"></i> Pricing</span>
+                <h2 class="title">Simple, Honest <span class="gt">Pricing</span></h2>
+                <p class="subtitle">No hidden fees. Pick a plan and launch in seconds.</p>
+            </div>
+            <div class="ptoggle" data-r>
+                <span class="ptog-lbl active" id="mlbl">Monthly</span>
+                <label class="tsw"><input type="checkbox" id="ptog" />
+                    <div class="tsw-track"></div>
+                    <div class="tsw-thumb"></div>
+                </label>
+                <span class="ptog-lbl" id="albl">Annual</span>
+                <span class="sav-badge">Save 20%</span>
+            </div>
+            <!-- Minecraft Plans -->
+            <div style="text-align:center;margin-bottom:12px;" data-r>
+                <span class="label"><i class="ri-gamepad-fill"></i> ⛏️ Minecraft Hosting</span>
+            </div>
+            <!-- Budget Beasts -->
+            <div class="price-category-label" data-r>
+                <div class="pcat-badge pcat-budget"><i class="ri-money-dollar-circle-fill"></i> Budget Beasts</div>
+                <div class="pcat-desc">Affordable plans — perfect to start your server journey</div>
+            </div>
+            <div class="price-grid" data-r>
+                <!-- 1. Pixel Plan -->
+                <div class="price-card">
+                    <div class="plan-name">👾 Pixel</div>
+                    <div class="plan-price"><span class="plan-cur">₹</span><span class="plan-amt"
+                            data-m="50">50</span><span class="plan-per">/mo</span></div>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-feats">
+                        <li><span class="ck">🖥️</span>4GB RAM</li>
+                        <li><span class="ck">⚙️</span>100% CPU</li>
+                        <li><span class="ck">💾</span>10GB SSD</li>
+                        <li><span class="ck">☁️</span>5x Cloud Backup</li>
+                        <li><span class="ck">🔌</span>5x Additional Ports</li>
+                        <li><span class="ck">🗄️</span>5x Database</li>
+                    </ul>
+                    <a href="#" class="btn btn-o" style="width:100%;justify-content:center;">Get Started</a>
+                </div>
+                <!-- 2. Sugarcane Growth Plan -->
+                <div class="price-card">
+                    <div class="plan-name">🎋 Sugarcane Growth</div>
+                    <div class="plan-price"><span class="plan-cur">₹</span><span class="plan-amt"
+                            data-m="100">100</span><span class="plan-per">/mo</span></div>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-feats">
+                        <li><span class="ck">🖥️</span>8GB RAM</li>
+                        <li><span class="ck">⚙️</span>200% CPU</li>
+                        <li><span class="ck">💾</span>20GB SSD</li>
+                        <li><span class="ck">☁️</span>8x Cloud Backup</li>
+                        <li><span class="ck">🔌</span>8x Additional Ports</li>
+                        <li><span class="ck">🗄️</span>8x Database</li>
+                    </ul>
+                    <a href="#" class="btn btn-o" style="width:100%;justify-content:center;">Get Started</a>
+                </div>
+                <!-- 3. Hammer Forge Plan -->
+                <div class="price-card">
+                    <div class="plan-name">🔨 Hammer Forge</div>
+                    <div class="plan-price"><span class="plan-cur">₹</span><span class="plan-amt"
+                            data-m="150">150</span><span class="plan-per">/mo</span></div>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-feats">
+                        <li><span class="ck">🖥️</span>12GB RAM</li>
+                        <li><span class="ck">⚙️</span>350% CPU</li>
+                        <li><span class="ck">💾</span>30GB SSD</li>
+                        <li><span class="ck">☁️</span>10x Cloud Backup</li>
+                        <li><span class="ck">🔌</span>10x Additional Ports</li>
+                        <li><span class="ck">🗄️</span>10x Database</li>
+                    </ul>
+                    <a href="#" class="btn btn-o" style="width:100%;justify-content:center;">Get Started</a>
+                </div>
+                <!-- 4. Store Pro Plan -->
+                <div class="price-card">
+                    <div class="plan-name">🛒 Store Pro</div>
+                    <div class="plan-price"><span class="plan-cur">₹</span><span class="plan-amt"
+                            data-m="200">200</span><span class="plan-per">/mo</span></div>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-feats">
+                        <li><span class="ck">🖥️</span>16GB RAM</li>
+                        <li><span class="ck">⚙️</span>400% CPU</li>
+                        <li><span class="ck">💾</span>40GB SSD</li>
+                        <li><span class="ck">☁️</span>10x Cloud Backup</li>
+                        <li><span class="ck">🔌</span>10x Additional Ports</li>
+                        <li><span class="ck">🗄️</span>10x Database</li>
+                    </ul>
+                    <a href="#" class="btn btn-o" style="width:100%;justify-content:center;">Get Started</a>
+                </div>
+                <!-- 5. Paper Elite Plan -->
+                <div class="price-card featured">
+                    <div class="price-badge"><i class="ri-medal-fill"></i> Most Popular</div>
+                    <div class="plan-name">📝 Paper Elite</div>
+                    <div class="plan-price"><span class="plan-cur">₹</span><span class="plan-amt"
+                            data-m="310">310</span><span class="plan-per">/mo</span></div>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-feats">
+                        <li><span class="ck">🖥️</span>32GB RAM</li>
+                        <li><span class="ck">⚙️</span>500% CPU</li>
+                        <li><span class="ck">💾</span>50GB SSD</li>
+                        <li><span class="ck">☁️</span>10x Cloud Backup</li>
+                        <li><span class="ck">🔌</span>10x Additional Ports</li>
+                        <li><span class="ck">🗄️</span>10x Database</li>
+                    </ul>
+                    <a href="#" class="btn btn-p" style="width:100%;justify-content:center;">Get Started</a>
+                </div>
+                <!-- 6. Heart Infinity Plan -->
+                <div class="price-card">
+                    <div class="plan-name">❤️ Heart Infinity</div>
+                    <div class="plan-price"><span class="plan-cur">₹</span><span class="plan-amt"
+                            data-m="450">450</span><span class="plan-per">/mo</span></div>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-feats">
+                        <li><span class="ck">🖥️</span>48GB RAM</li>
+                        <li><span class="ck">⚙️</span>600% CPU</li>
+                        <li><span class="ck">💾</span>600GB SSD</li>
+                        <li><span class="ck">☁️</span>10x Cloud Backup</li>
+                        <li><span class="ck">🔌</span>10x Additional Ports</li>
+                        <li><span class="ck">🗄️</span>10x Database</li>
+                    </ul>
+                    <a href="#" class="btn btn-a" style="width:100%;justify-content:center;">Get Started</a>
+                </div>
+            </div>
+
+            <!-- Powerhouse Plans -->
+            <div class="price-category-label" data-r style="margin-top:40px;">
+                <div class="pcat-badge pcat-power"><i class="ri-flashlight-fill"></i> Powerhouse Plans</div>
+                <div class="pcat-desc">High-performance plans for serious gamers &amp; large communities</div>
+            </div>
+            <div class="price-grid" data-r>
+                <!-- 1. DIRT PLAN -->
+                <div class="price-card">
+                    <div class="plan-name">🟫 Dirt</div>
+                    <div class="plan-desc">Powered by AMD EPYC 9R14 | NVMe SSD</div>
+                    <div class="plan-price"><span class="plan-cur">₹</span><span class="plan-amt"
+                            data-m="119">119</span><span class="plan-per">/mo</span></div>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-feats">
+                        <li><span class="ck">🖥️</span>2GB RAM</li>
+                        <li><span class="ck">⚙️</span>0.5 vCore</li>
+                        <li><span class="ck">💾</span>10GB NVMe</li>
+                        <li><span class="ck">☁️</span>2x Backups</li>
+                        <li><span class="ck">🗄️</span>1 Database</li>
+                        <li><span class="ck">🔌</span>2 Ports</li>
+                    </ul>
+                    <a href="#" class="btn btn-o" style="width:100%;justify-content:center;">Get Started</a>
+                </div>
+                <!-- 2. GRASS PLAN -->
+                <div class="price-card">
+                    <div class="plan-name">🟩 Grass</div>
+                    <div class="plan-desc">Powered by AMD EPYC 9R14 | NVMe SSD</div>
+                    <div class="plan-price"><span class="plan-cur">₹</span><span class="plan-amt"
+                            data-m="249">249</span><span class="plan-per">/mo</span></div>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-feats">
+                        <li><span class="ck">🖥️</span>5GB RAM</li>
+                        <li><span class="ck">⚙️</span>1 vCore</li>
+                        <li><span class="ck">💾</span>20GB NVMe</li>
+                        <li><span class="ck">☁️</span>3x Backups</li>
+                        <li><span class="ck">🗄️</span>2 Databases</li>
+                        <li><span class="ck">🔌</span>3 Ports</li>
+                    </ul>
+                    <a href="#" class="btn btn-o" style="width:100%;justify-content:center;">Get Started</a>
+                </div>
+                <!-- 3. STONE PLAN -->
+                <div class="price-card">
+                    <div class="plan-name">🪨 Stone</div>
+                    <div class="plan-desc">Powered by AMD EPYC 9R14 | NVMe SSD</div>
+                    <div class="plan-price"><span class="plan-cur">₹</span><span class="plan-amt"
+                            data-m="399">399</span><span class="plan-per">/mo</span></div>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-feats">
+                        <li><span class="ck">🖥️</span>8GB RAM</li>
+                        <li><span class="ck">⚙️</span>1.5 vCore</li>
+                        <li><span class="ck">💾</span>30GB NVMe</li>
+                        <li><span class="ck">☁️</span>4x Backups</li>
+                        <li><span class="ck">🗄️</span>3 Databases</li>
+                        <li><span class="ck">🔌</span>4 Ports</li>
+                    </ul>
+                    <a href="#" class="btn btn-o" style="width:100%;justify-content:center;">Get Started</a>
+                </div>
+                <!-- 4. COAL PLAN -->
+                <div class="price-card">
+                    <div class="plan-name">⚫ Coal</div>
+                    <div class="plan-desc">Powered by AMD EPYC 9R14 | NVMe SSD</div>
+                    <div class="plan-price"><span class="plan-cur">₹</span><span class="plan-amt"
+                            data-m="549">549</span><span class="plan-per">/mo</span></div>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-feats">
+                        <li><span class="ck">🖥️</span>11GB RAM</li>
+                        <li><span class="ck">⚙️</span>2 vCore</li>
+                        <li><span class="ck">💾</span>45GB NVMe</li>
+                        <li><span class="ck">☁️</span>5x Backups</li>
+                        <li><span class="ck">🗄️</span>4 Databases</li>
+                        <li><span class="ck">🔌</span>5 Ports</li>
+                    </ul>
+                    <a href="#" class="btn btn-o" style="width:100%;justify-content:center;">Get Started</a>
+                </div>
+                <!-- 5. IRON PLAN -->
+                <div class="price-card">
+                    <div class="plan-name">⚪ Iron</div>
+                    <div class="plan-desc">Powered by AMD EPYC 9R14 | NVMe SSD</div>
+                    <div class="plan-price"><span class="plan-cur">₹</span><span class="plan-amt"
+                            data-m="699">699</span><span class="plan-per">/mo</span></div>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-feats">
+                        <li><span class="ck">🖥️</span>14GB RAM</li>
+                        <li><span class="ck">⚙️</span>2.5 vCore</li>
+                        <li><span class="ck">💾</span>60GB NVMe</li>
+                        <li><span class="ck">☁️</span>6x Backups</li>
+                        <li><span class="ck">🗄️</span>5 Databases</li>
+                        <li><span class="ck">🔌</span>6 Ports</li>
+                    </ul>
+                    <a href="#" class="btn btn-o" style="width:100%;justify-content:center;">Get Started</a>
+                </div>
+                <!-- 6. REDSTONE PLAN -->
+                <div class="price-card">
+                    <div class="plan-name">🔴 Redstone</div>
+                    <div class="plan-desc">Powered by AMD EPYC 9R14 | NVMe SSD</div>
+                    <div class="plan-price"><span class="plan-cur">₹</span><span class="plan-amt"
+                            data-m="899">899</span><span class="plan-per">/mo</span></div>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-feats">
+                        <li><span class="ck">🖥️</span>17GB RAM</li>
+                        <li><span class="ck">⚙️</span>3 vCore</li>
+                        <li><span class="ck">💾</span>75GB NVMe</li>
+                        <li><span class="ck">☁️</span>7x Backups</li>
+                        <li><span class="ck">🗄️</span>6 Databases</li>
+                        <li><span class="ck">🔌</span>7 Ports</li>
+                    </ul>
+                    <a href="#" class="btn btn-o" style="width:100%;justify-content:center;">Get Started</a>
+                </div>
+                <!-- 7. GOLD PLAN -->
+                <div class="price-card">
+                    <div class="plan-name">🟡 Gold</div>
+                    <div class="plan-desc">Powered by AMD EPYC 9R14 | NVMe SSD</div>
+                    <div class="plan-price"><span class="plan-cur">₹</span><span class="plan-amt"
+                            data-m="1099">1099</span><span class="plan-per">/mo</span></div>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-feats">
+                        <li><span class="ck">🖥️</span>20GB RAM</li>
+                        <li><span class="ck">⚙️</span>3.5 vCore</li>
+                        <li><span class="ck">💾</span>90GB NVMe</li>
+                        <li><span class="ck">☁️</span>8x Backups</li>
+                        <li><span class="ck">🗄️</span>7 Databases</li>
+                        <li><span class="ck">🔌</span>8 Ports</li>
+                    </ul>
+                    <a href="#" class="btn btn-o" style="width:100%;justify-content:center;">Get Started</a>
+                </div>
+                <!-- 8. DIAMOND PLAN -->
+                <div class="price-card featured">
+                    <div class="price-badge"><i class="ri-medal-fill"></i> Best Specs</div>
+                    <div class="plan-name">💎 Diamond</div>
+                    <div class="plan-desc">Powered by AMD EPYC 9R14 | NVMe SSD</div>
+                    <div class="plan-price"><span class="plan-cur">₹</span><span class="plan-amt"
+                            data-m="1299">1299</span><span class="plan-per">/mo</span></div>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-feats">
+                        <li><span class="ck">🖥️</span>23GB RAM</li>
+                        <li><span class="ck">⚙️</span>3.8 vCore</li>
+                        <li><span class="ck">💾</span>105GB NVMe</li>
+                        <li><span class="ck">☁️</span>9x Backups</li>
+                        <li><span class="ck">🗄️</span>8 Databases</li>
+                        <li><span class="ck">🔌</span>9 Ports</li>
+                    </ul>
+                    <a href="#" class="btn btn-p" style="width:100%;justify-content:center;">Get Started</a>
+                </div>
+                <!-- 9. EMERALD PLAN -->
+                <div class="price-card">
+                    <div class="plan-name">🟢 Emerald</div>
+                    <div class="plan-desc">Powered by AMD EPYC 9R14 | NVMe SSD</div>
+                    <div class="plan-price"><span class="plan-cur">₹</span><span class="plan-amt"
+                            data-m="1499">1499</span><span class="plan-per">/mo</span></div>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-feats">
+                        <li><span class="ck">🖥️</span>26GB RAM</li>
+                        <li><span class="ck">⚙️</span>4 vCore</li>
+                        <li><span class="ck">💾</span>115GB NVMe</li>
+                        <li><span class="ck">☁️</span>10x Backups</li>
+                        <li><span class="ck">🗄️</span>9 Databases</li>
+                        <li><span class="ck">🔌</span>10 Ports</li>
+                    </ul>
+                    <a href="#" class="btn btn-o" style="width:100%;justify-content:center;">Get Started</a>
+                </div>
+                <!-- 10. NETHERITE PLAN -->
+                <div class="price-card">
+                    <div class="plan-name">⬛ Netherite</div>
+                    <div class="plan-desc">Powered by AMD EPYC 9R14 | NVMe SSD</div>
+                    <div class="plan-price"><span class="plan-cur">₹</span><span class="plan-amt"
+                            data-m="1699">1699</span><span class="plan-per">/mo</span></div>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-feats">
+                        <li><span class="ck">🖥️</span>28GB RAM</li>
+                        <li><span class="ck">⚡</span>4 vCore ⚡</li>
+                        <li><span class="ck">💾</span>120GB NVMe</li>
+                        <li><span class="ck">☁️</span>12x Backups</li>
+                        <li><span class="ck">🗄️</span>10 Databases</li>
+                        <li><span class="ck">🔌</span>12 Ports</li>
+                    </ul>
+                    <a href="#" class="btn btn-a" style="width:100%;justify-content:center;">Get Started</a>
+                </div>
+            </div>
+
+            <!-- VPS Plans -->
+            <div class="price-category-label" data-r style="margin-top:50px;">
+                <div class="pcat-badge pcat-vps"><i class="ri-server-fill"></i> VPS Hosting</div>
+                <div class="pcat-desc">Full root access virtual private servers — your server, your rules</div>
+            </div>
+            <div class="price-grid" data-r>
+                <div class="price-card">
+                    <div class="plan-name">VPS Nano</div>
+                    <div class="plan-desc">Entry-level VPS for bots, panels &amp; small apps.</div>
+                    <div class="plan-price"><span class="plan-cur">₹</span><span class="plan-amt" data-m="199"
+                            data-a="159">199</span><span class="plan-per">/mo</span></div>
+                    <div class="plan-note">billed monthly · no contract</div>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-feats">
+                        <li><span class="ck">✓</span>1 GB RAM</li>
+                        <li><span class="ck">✓</span>1 vCPU Core</li>
+                        <li><span class="ck">✓</span>20 GB NVMe SSD</li>
+                        <li><span class="ck">✓</span>1 TB Bandwidth</li>
+                        <li><span class="ck">✓</span>Full Root Access</li>
+                        <li><span class="ck">✓</span>KVM Virtualization</li>
+                        <li><span class="cx">✗</span>Managed Support</li>
+                    </ul>
+                    <a href="#" class="btn btn-o" style="width:100%;justify-content:center;">Get Started</a>
+                </div>
+                <div class="price-card featured">
+                    <div class="price-badge"><i class="ri-medal-fill"></i> Best Value</div>
+                    <div class="plan-name">VPS Core</div>
+                    <div class="plan-desc">Perfect for game panels, web apps &amp; APIs.</div>
+                    <div class="plan-price"><span class="plan-cur">₹</span><span class="plan-amt" data-m="399"
+                            data-a="319">399</span><span class="plan-per">/mo</span></div>
+                    <div class="plan-note">billed monthly · no contract</div>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-feats">
+                        <li><span class="ck">✓</span>4 GB RAM</li>
+                        <li><span class="ck">✓</span>2 vCPU Cores</li>
+                        <li><span class="ck">✓</span>60 GB NVMe SSD</li>
+                        <li><span class="ck">✓</span>2 TB Bandwidth</li>
+                        <li><span class="ck">✓</span>Full Root Access</li>
+                        <li><span class="ck">✓</span>KVM Virtualization</li>
+                        <li><span class="ck">✓</span>Free IPv4 Address</li>
+                    </ul>
+                    <a href="#" class="btn btn-p" style="width:100%;justify-content:center;">Get Started</a>
+                </div>
+                <div class="price-card">
+                    <div class="plan-name">VPS Pro</div>
+                    <div class="plan-desc">For demanding workloads, databases &amp; high traffic.</div>
+                    <div class="plan-price"><span class="plan-cur">₹</span><span class="plan-amt" data-m="799"
+                            data-a="639">799</span><span class="plan-per">/mo</span></div>
+                    <div class="plan-note">billed monthly · no contract</div>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-feats">
+                        <li><span class="ck">✓</span>8 GB RAM</li>
+                        <li><span class="ck">✓</span>4 vCPU Cores</li>
+                        <li><span class="ck">✓</span>120 GB NVMe SSD</li>
+                        <li><span class="ck">✓</span>Unmetered Bandwidth</li>
+                        <li><span class="ck">✓</span>Full Root Access</li>
+                        <li><span class="ck">✓</span>KVM Virtualization</li>
+                        <li><span class="ck">✓</span>Managed Support</li>
+                    </ul>
+                    <a href="#" class="btn btn-a" style="width:100%;justify-content:center;">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PLAN CALCULATOR (LordCloud style) -->
+    <section id="calculator" class="section">
+        <div class="container">
+            <div class="tc" data-r>
+                <span class="label"><i class="ri-calculator-fill"></i> Plan Finder</span>
+                <h2 class="title">Not Sure Which Plan<br /><span class="gt">to Pick?</span></h2>
+                <p class="subtitle">Our smart calculator will find the perfect plan for your server based on your needs.
+                </p>
+            </div>
+            <div class="calc-wrap" data-r>
+                <div class="calc-head">
+                    <div class="calc-title"><i class="ri-focus-3-fill" style="color:var(--purple-l)"></i> Smart Plan
+                        Calculator</div>
+                    <div class="calc-sub">Adjust the sliders below and we'll recommend the perfect plan for you.</div>
+                </div>
+                <div class="calc-body">
+                    <div class="calc-inputs">
+                        <div class="calc-row">
+                            <div class="calc-lbl">Number of Players <span id="playersVal">10</span></div>
+                            <input type="range" id="playersRange" min="1" max="100" value="10" />
+                        </div>
+                        <div class="calc-row">
+                            <div class="calc-lbl">RAM Required (GB) <span id="ramVal">2</span> GB</div>
+                            <input type="range" id="ramRange" min="1" max="16" value="2" />
+                        </div>
+                        <div class="calc-row">
+                            <div class="calc-lbl">Add-ons</div>
+                            <div class="calc-checks">
+                                <label class="calc-check"><input type="checkbox" id="ckMods" /> Mods / Plugins</label>
+                                <label class="calc-check"><input type="checkbox" id="ckCustom" /> Custom Domain</label>
+                                <label class="calc-check"><input type="checkbox" id="ckPriority" /> Priority
+                                    Support</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calc-result" id="calcResult">
+                        <div class="cr-left">
+                            <div class="cr-rec">Our Recommendation</div>
+                            <div class="cr-name" id="crName">Budget Beast — Creeper</div>
+                            <div class="cr-why" id="crWhy">Works great for solo play and tiny friend groups with basic
+                                setups.</div>
+                        </div>
+                        <div class="cr-right">
+                            <div>
+                                <div style="font-size:12px;color:var(--t3);">Starting from</div>
+                                <div class="cr-price"><span class="cr-price-sup">₹</span><span
+                                        id="crPrice">35</span><span class="cr-price-sup">/mo</span></div>
+                            </div>
+                            <a href="#pricing" class="btn btn-p">Get This Plan</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" class="section sec-alt">
+        <div class="container">
+            <div class="tc" data-r><span class="label"><i class="ri-chat-quote-fill"></i> Testimonials</span>
+                <h2 class="title">Loved by <span class="gt">Gamers</span> Across India</h2>
+                <p class="subtitle">Don't take our word for it — here's what our community says.</p>
+            </div>
+            <div class="testi-grid">
+                <div class="testi-card" data-r data-rd="1">
+                    <div class="t-stars"><span class="star">★</span><span class="star">★</span><span
+                            class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+                    <p class="t-text">"Switched from another provider after constant lag. RexaCloud's Mumbai server
+                        gives us sub-15ms ping and we've had zero downtime in 3 months. Absolutely worth every rupee!"
+                    </p>
+                    <div class="t-author">
+                        <div class="t-av">R</div>
+                        <div>
+                            <div class="t-name">Wardin Gaming</div>
+                            <div class="t-role">Minecraft SMP Creator · Event Organiser</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card" data-r data-rd="2">
+                    <div class="t-stars"><span class="star">★</span><span class="star">★</span><span
+                            class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+                    <p class="t-text">"The support team replied at 2 AM within 5 minutes. Setup was instant and the
+                        Pterodactyl panel is super clean. Best hosting decision I've made for my ARK server!"</p>
+                    <div class="t-author">
+                        <div class="t-av" style="background:linear-gradient(135deg,#f59e0b,#fbbf24);">A</div>
+                        <div>
+                            <div class="t-name">Rahul Verma</div>
+                            <div class="t-role">Minecraft Server Owner · 500+ Players</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card" data-r data-rd="3">
+                    <div class="t-stars"><span class="star">★</span><span class="star">★</span><span
+                            class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+                    <p class="t-text">"Running a 100-slot Minecraft server on the Elite plan. NVMe storage makes a
+                        massive
+                        difference — zero disk-related lag. Finally a hosting company that actually delivers!"</p>
+                    <div class="t-author">
+                        <div class="t-av" style="background:linear-gradient(135deg,#06b6d4,#22d3ee);">V</div>
+                        <div>
+                            <div class="t-name">Lakshya Singh</div>
+                            <div class="t-role">Minecraft Gamer · Community with 5000 Members</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section">
+        <div class="container">
+            <div class="tc" data-r><span class="label"><i class="ri-question-fill"></i> FAQ</span>
+                <h2 class="title">Got <span class="gt">Questions?</span></h2>
+                <p class="subtitle">Most common questions answered. Still stuck? Chat on Discord!</p>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item" data-r>
+                    <div class="faq-q"><span class="faq-qt">How quickly will my server be deployed?</span>
+                        <div class="faq-ico">+</div>
+                    </div>
+                    <div class="faq-ans">
+                        <div class="faq-ans-in">Under 30 seconds. Automated provisioning on high-performance nodes means
+                            no waiting. You'll get an email with your panel login instantly after payment.</div>
+                    </div>
+                </div>
+                <div class="faq-item" data-r data-rd="1">
+                    <div class="faq-q"><span class="faq-qt">What payment methods do you accept?</span>
+                        <div class="faq-ico">+</div>
+                    </div>
+                    <div class="faq-ans">
+                        <div class="faq-ans-in">UPI, Net Banking, Credit/Debit Cards (Visa, Mastercard, RuPay), Paytm,
+                            and Google Pay via Razorpay. PayPal available on request for international payments.</div>
+                    </div>
+                </div>
+                <div class="faq-item" data-r data-rd="2">
+                    <div class="faq-q"><span class="faq-qt">Can I upgrade or downgrade my plan anytime?</span>
+                        <div class="faq-ico">+</div>
+                    </div>
+                    <div class="faq-ans">
+                        <div class="faq-ans-in">Yes! Upgrade anytime from your billing panel — price difference is
+                            prorated. Downgrades take effect at the next billing cycle. Your data is always safe during
+                            plan changes.</div>
+                    </div>
+                </div>
+                <div class="faq-item" data-r data-rd="1">
+                    <div class="faq-q"><span class="faq-qt">Do you offer a money-back guarantee?</span>
+                        <div class="faq-ico">+</div>
+                    </div>
+                    <div class="faq-ans">
+                        <div class="faq-ans-in">Yes — 72-hour money-back guarantee on all game server plans. Contact us
+                            within 72 hours of purchase for a full refund, no questions asked.</div>
+                    </div>
+                </div>
+                <div class="faq-item" data-r data-rd="2">
+                    <div class="faq-q"><span class="faq-qt">Is DDoS protection included on all plans?</span>
+                        <div class="faq-ico">+</div>
+                    </div>
+                    <div class="faq-ans">
+                        <div class="faq-ans-in">Yes, enterprise-grade DDoS protection is included on every plan at no
+                            extra cost. Our 1Tbps+ capacity filtering network automatically detects and blocks attacks
+                            24/7.</div>
+                    </div>
+                </div>
+                <div class="faq-item" data-r>
+                    <div class="faq-q"><span class="faq-qt">Which game panel do you provide?</span>
+                        <div class="faq-ico">+</div>
+                    </div>
+                    <div class="faq-ans">
+                        <div class="faq-ans-in">All game servers run on Pterodactyl Panel — the industry standard,
+                            featuring a web console, file manager, SFTP access, scheduling, sub-user management, and
+                            real-time stats. 100% free.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DISCORD BANNER -->
+    <div id="discord" class="discord-section">
+        <div class="discord-bg"></div>
+        <div class="discord-particles">
+            <div class="discord-particle"><i class="ri-chat-smile-2-fill"></i></div>
+            <div class="discord-particle"><i class="ri-gamepad-fill"></i></div>
+            <div class="discord-particle"><i class="ri-flashlight-fill"></i></div>
+            <div class="discord-particle"><i class="ri-focus-3-fill"></i></div>
+            <div class="discord-particle"><i class="ri-shield-check-fill"></i></div>
+            <div class="discord-particle"><i class="ri-rocket-2-fill"></i></div>
+        </div>
+        <div class="discord-in">
+            <div class="discord-card" data-r>
+                <div class="discord-srv">
+                    <div class="discord-srv-icon"><i class="ri-discord-fill" style="font-size:30px;"></i></div>
+                    <div>
+                        <div class="discord-srv-name">RexaCloud Official</div>
+                        <div class="discord-srv-tag">discord.gg/T9kzKF8J · Public Server</div>
+                    </div>
+                </div>
+                <div class="discord-channels">
+                    <div class="dc-ch"><i class="ri-megaphone-fill dc-ch-icon"></i> announcements</div>
+                    <div class="dc-ch"><i class="ri-customer-service-2-fill dc-ch-icon"></i> support-tickets</div>
+                    <div class="dc-ch"><i class="ri-chat-3-fill dc-ch-icon"></i> general-chat</div>
+                    <div class="dc-ch"><i class="ri-gamepad-fill dc-ch-icon"></i> server-showcase</div>
+                    <div class="dc-ch"><i class="ri-gift-2-fill dc-ch-icon"></i> giveaways</div>
+                </div>
+                <button class="btn-discord-main" onclick="window.open('https://discord.gg/T9kzKF8J','_blank')">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z" />
+                    </svg>
+                    Join Our Discord Server
+                </button>
+            </div>
+            <div class="discord-text" data-r data-rd="2">
+                <span class="label"
+                    style="background:rgba(88,101,242,0.12);border-color:rgba(88,101,242,0.3);color:#818cf8;"><i
+                        class="ri-discord-fill"></i> Community</span>
+                <h2 class="title">Join Our <span style="color:#5865F2;">Discord</span><br />Community</h2>
+                <p style="font-size:16px;color:var(--t2);line-height:1.75;margin-bottom:8px;">Connect with thousands of
+                    Indian gamers & developers. Get instant support, share experiences, participate in giveaways, and
+                    stay updated with the latest news.</p>
+                <div class="discord-perks">
+                    <div class="dc-perk">
+                        <div class="dc-perk-icon"><i class="ri-customer-service-2-fill"></i></div>
+                        <div>
+                            <div class="dc-perk-title">Instant Support</div>
+                            <div class="dc-perk-desc">Get help from our team and community members in real-time.</div>
+                        </div>
+                    </div>
+                    <div class="dc-perk">
+                        <div class="dc-perk-icon"><i class="ri-gift-2-fill"></i></div>
+                        <div>
+                            <div class="dc-perk-title">Exclusive Giveaways</div>
+                            <div class="dc-perk-desc">Win free server months, upgrades and exclusive Discord roles.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dc-perk">
+                        <div class="dc-perk-icon"><i class="ri-notification-3-fill"></i></div>
+                        <div>
+                            <div class="dc-perk-title">Early Announcements</div>
+                            <div class="dc-perk-desc">Be first to know about new features, offers, and maintenance.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-ban">
+        <div class="cta-ban-bg"></div>
+        <div class="cta-ban-in">
+            <div class="cta-ban-title" data-r>Join 1,200+<br /><span class="gt">Happy Gamers</span><br />on RexaCloud
+            </div>
+            <p class="cta-ban-desc" data-r data-rd="1">Get your server live in 30 seconds. First month 30% off with code
+                <strong style="color:var(--amber)">REXA30</strong>.
+            </p>
+            <div class="cta-btns" data-r data-rd="2">
+                <a href="#pricing" class="btn btn-a btn-lg"><i class="ri-rocket-2-fill"></i> Start Hosting</a>
+                <a href="https://discord.gg/T9kzKF8J" target="_blank" class="btn btn-discord btn-lg"><i
+                        class="ri-discord-fill"></i> Join Discord</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="foot-in">
+            <div class="foot-top">
+                <div class="foot-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-icon"><img src="logo.png" alt="RexaCloud Logo"
+                                style="width:100%;height:100%;object-fit:cover;border-radius:6px;" /></div>RexaCloud
+                    </a>
+                    <p>Premium game server & cloud hosting for Indian gamers and creators. Fast, reliable, affordable —
+                        powered by enterprise-grade infrastructure.</p>
+                    <div class="socials">
+                        <a href="https://discord.gg/T9kzKF8J" target="_blank" class="social" title="Discord"><i
+                                class="ri-discord-fill"></i></a>
+                        <a href="#" class="social" title="Twitter"><i class="ri-twitter-x-fill"></i></a>
+                        <a href="#" class="social" title="Instagram"><i class="ri-instagram-fill"></i></a>
+                        <a href="#" class="social" title="YouTube"><i class="ri-youtube-fill"></i></a>
+                    </div>
+                </div>
+                <div class="foot-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Game Servers</a></li>
+                        <li><a href="#">VPS Hosting</a></li>
+                        <li><a href="#">Web Hosting</a></li>
+                        <li><a href="#">Discord Bots</a></li>
+                    </ul>
+                </div>
+                <div class="foot-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Status</a></li>
+                    </ul>
+                </div>
+                <div class="foot-col">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="https://discord.gg/T9kzKF8J" target="_blank">Discord</a></li>
+                        <li><a href="javascript:void(0)"
+                                onclick="document.getElementById('ticketModal').classList.add('active')">Submit
+                                Ticket</a></li>
+                        <li><a href="#">Knowledgebase</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="foot-bot">
+                <p class="foot-copy">© 2025 <a href="#">RexaCloud</a>. All rights reserved. Made with ❤️ in India 🇮🇳
+                </p>
+                <div class="pay-badges"><span class="pay-badge">UPI</span><span class="pay-badge">Razorpay</span><span
+                        class="pay-badge">Paytm</span><span class="pay-badge">Visa</span><span
+                        class="pay-badge">Mastercard</span></div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- TICKET MODAL -->
+    <div id="ticketModal" class="ticket-modal">
+        <div class="ticket-modal-bg" onclick="document.getElementById('ticketModal').classList.remove('active')"></div>
+        <div class="ticket-modal-content">
+            <div class="tm-header">
+                <i class="ri-customer-service-2-fill tm-icon"></i>
+                <h3 class="tm-title">Open Support Ticket</h3>
+                <button class="tm-close" onclick="document.getElementById('ticketModal').classList.remove('active')"><i
+                        class="ri-close-line"></i></button>
+            </div>
+            <div class="tm-body">
+                <div class="tm-form-group">
+                    <label>Department</label>
+                    <select class="tm-input">
+                        <option>Technical Support</option>
+                        <option>Billing & Sales</option>
+                        <option>General Inquiry</option>
+                    </select>
+                </div>
+                <div class="tm-form-group">
+                    <label>Subject</label>
+                    <input type="text" class="tm-input" placeholder="Briefly describe your issue..." />
+                </div>
+                <div class="tm-form-group">
+                    <label>Message</label>
+                    <textarea class="tm-input" rows="4"
+                        placeholder="Provide as much detail as possible so we can help you faster."></textarea>
+                </div>
+                <button class="btn btn-p" style="width:100%;justify-content:center;"
+                    onclick="alert('Ticket successfully submitted! We will respond via email shortly.'); document.getElementById('ticketModal').classList.remove('active');">Submit
+                    Ticket</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
